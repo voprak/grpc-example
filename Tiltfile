@@ -8,6 +8,12 @@ print("context is: {}\n".format(k8s_context()))
 # Tilt Extension to sync files without restarting container when required
 load('ext://restart_process', 'docker_build_with_restart')
 
+local_resource(
+  'code generation',
+  'protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative greeter-server/pb/service.proto',
+  deps=['greeter-server/pb/service.proto']
+)
+
 # configure go compilation command to run on host machine
 local_resource(
   'greeter-server-compile',
