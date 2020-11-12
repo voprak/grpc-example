@@ -54,3 +54,8 @@ docker_build_with_restart(
 k8s_yaml(serv+'/deployments/kubernetes.yaml')
 # create/configure greeter-server kubernetes deployment resource
 k8s_resource(serv, port_forwards=59000, resource_deps=[serv+'-compile'])
+
+local_resource(
+    serv+'-tests',
+    "ginkgo -r"
+)

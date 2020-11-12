@@ -3,14 +3,15 @@ package rpci_test
 import (
 	"context"
 	"fmt"
+	"log"
+	"net"
+
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	pb "github.com/voprak/grpc-example/greeter-server/pb"
 	"github.com/voprak/grpc-example/greeter-server/rpci"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/test/bufconn"
-	"log"
-	"net"
 )
 
 func dialer() func(context.Context, string) (net.Conn, error) {
@@ -34,8 +35,8 @@ func dialer() func(context.Context, string) (net.Conn, error) {
 var _ = Describe("Server", func() {
 
 	Describe("Say Hello ", func() {
-		Context("With value", func() {
-			It("Should greet with the name provided", func() {
+		Context("With nonempty name", func() {
+			It("Should return message Hello with the name provided", func() {
 				ctx := context.Background()
 				conn, err := grpc.DialContext(ctx, "", grpc.WithInsecure(), grpc.WithContextDialer(dialer()))
 				if err != nil {
