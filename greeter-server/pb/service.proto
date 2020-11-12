@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/voprak/grpc-example/pb/service";
+option go_package = "github.com/voprak/grpc-example/pb/greeter";
 
 package greeter;
 
