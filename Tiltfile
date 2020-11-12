@@ -59,5 +59,6 @@ k8s_resource(serv, port_forwards=59000, resource_deps=[serv+'-compile'])
 
 local_resource(
     serv+'-tests',
-    "ginkgo -r"
+    "ginkgo -r",
+    deps=[serv+'/rpci/server_test.go']
 )

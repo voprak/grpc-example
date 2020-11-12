@@ -2,7 +2,6 @@ package rpci_test
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"net"
 
@@ -36,7 +35,7 @@ var _ = Describe("Server", func() {
 
 	Describe("Say Hello ", func() {
 		Context("With nonempty name", func() {
-			It("Should return message Hello with the name provided", func() {
+			It("should return message Hello with the name provided", func() {
 				ctx := context.Background()
 				conn, err := grpc.DialContext(ctx, "", grpc.WithInsecure(), grpc.WithContextDialer(dialer()))
 				if err != nil {
@@ -48,10 +47,7 @@ var _ = Describe("Server", func() {
 
 				request := &pb.HelloRequest{Name: "Go developers"}
 				response, err := client.SayHello(ctx, request)
-				m := response.GetMessage()
-				fmt.Println(m)
-				Expect(m).To(Equal("Hello Go developers"))
-
+				Expect(response.GetMessage()).To(Equal("Hello Go developers"))
 			})
 		})
 	})
